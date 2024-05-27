@@ -1,5 +1,7 @@
 # Communication Gateway (498 points/9 solves)
 
+Something is in-front of you, and you don't even know it.
+
 **Author:** 0x157
 
 **Challenge File:** [file10.wav](./file10.wav)
