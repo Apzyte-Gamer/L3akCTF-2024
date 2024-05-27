@@ -69,3 +69,6 @@ Another solution involves using `minimodem` to decode the audio. By running the 
 
 ![image](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/5239363a-62e1-4ed7-a5e9-1bf26ad7cdf0)
 
+
+
+Overall, this was a very fun challenge (being my 1st hardware solve ever) and I learned A LOT from this challenge!
