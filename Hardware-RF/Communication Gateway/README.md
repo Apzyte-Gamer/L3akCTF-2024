@@ -14,52 +14,22 @@ Initially, no one could solve this challenge. However, a hint was provided that 
 
 ## Analyzing the Audio
 
-Upon opening the file in Audacity and viewing its spectrogram, it became clear that there were two lines of data, one higher and one lower.
+First of all, we can open the audio in Audacity and analyze the waveform. We can zoom in it and see that there are 2 waves going:
 
-![Spectrogram](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/f1fa9f92-62cb-4eac-9cd4-592080c18826)
+![image](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/90b7996e-fe5d-4511-a477-424bb33efebd)
 
-## Using the Hint
-
-The hint suggested that the signals were modem signals, and the term "baud" refers to the bitrate. This indicated that the challenge involved bitrates and modems.
-
-## Understanding the Waves
-
-Using the application `baudline`, the waterfall display of the audio revealed two peaks.
+I also used the application `baudline` to see the waterfall display of the audio.
 
 ![Waterfall Display](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/61c9a709-9165-4269-96c2-a94f205cf95a)
 
-### Waveform Visualization
+## Understanding the Waves
 
-A Python script was used to plot the waveform.
+We can now plot the spectrum of the audio (using audacity) and see that the frequency of one wave is 1415 Hz and frequency of the other one is 1583 Hz.
 
-```py
-import wave
-import numpy as np
-import matplotlib.pyplot as plt
+![image](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/89acffe9-838a-46f6-90e4-8784e05bbda2)
+![image](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/f79c9cfb-2ee2-43bb-a69f-3f9fbc85fa51)
 
-file_path = 'file10.wav'
-with wave.open(file_path, 'r') as wav_file:
-    n_channels = wav_file.getnchannels()
-    sampwidth = wav_file.getsampwidth()
-    framerate = wav_file.getframerate()
-    n_frames = wav_file.getnframes()
-    audio_data = wav_file.readframes(n_frames)
-
-audio_signal = np.frombuffer(audio_data, dtype=np.int16)
-
-time_axis = np.linspace(0, n_frames / framerate, num=n_frames)
-
-
-zoom_factor = 1000
-plt.figure(figsize=(12, 6))
-plt.plot(time_axis[:zoom_factor], audio_signal[:zoom_factor], linewidth=0.5)
-plt.title('Waveform of file10.wav (Zoomed In)')
-plt.xlabel('Time (seconds)')
-plt.ylabel('Amplitude')
-plt.show()
-```
-
-![image](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/10d92ceb-8e44-4c7d-91f3-ce06bfc81434)
+We can see that the audio has 2 peaks.
 
 ### Frequency-Shift Keying (FSK)
 
@@ -67,14 +37,18 @@ The waveform displayed characteristics of Frequency-Shift Keying (FSK), a modula
 
 ![FSK](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/42b6e880-98b7-4719-ab30-7b0dc3a2f9c5)
 
+We can clearly see that this signal is a modulated wave.
+
 ## Extracting the Data
 
-### Filtering with GNU Radio
+### Filtering
 
-1. **Low-Pass Filter:** Isolate the lower peak.
-2. **High-Pass Filter:** Isolate the upper peak.
+1. **Low-Pass Filter:** Isolate the lower peak. (1415 Hz)
+2. **High-Pass Filter:** Isolate the upper peak. (1583 Hz)
 
 This resulted in two separate channels, one for binary `1`s and one for binary `0`s.
+
+![image](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/0e2e75b8-dd34-4524-9b15-e780d1e47382)
 
 ### Decoding the Data
 
@@ -85,7 +59,7 @@ Key observations:
 
 ### Assembling the Flag
 
-By manually transferring the bits, the flag was retrieved.
+Now, we can just manually get the binary values and convert from binary to plaintext and we get the flag!
 
 **Flag:** `L3AK{s1gn4ls_0f_h0p3}`
 
