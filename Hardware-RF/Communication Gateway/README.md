@@ -2,7 +2,7 @@
 
 **Author:** 0x157
 
-**Challenge File:** `file10.wav`
+**Challenge File:** (file10.wav)[./file10.wav]
 
 ## Backstory
 
