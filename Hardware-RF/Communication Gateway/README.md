@@ -24,7 +24,7 @@ I also used the application `baudline` to see the waterfall display of the audio
 
 ## Understanding the Waves
 
-We can now plot the spectrum of the audio (using audacity) and see that the frequency of one wave is 1415 Hz and frequency of the other one is 1583 Hz.
+To understand both of the waves, we can plot the spectrum of the audio (using audacity) and see that the frequency of one wave is 1415 Hz and frequency of the other one is 1583 Hz.
 
 ![image](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/89acffe9-838a-46f6-90e4-8784e05bbda2)
 ![image](https://github.com/Apzyte-Gamer/L3akCTF-2024/assets/71684682/f79c9cfb-2ee2-43bb-a69f-3f9fbc85fa51)
